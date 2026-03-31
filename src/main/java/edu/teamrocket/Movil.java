@@ -1,6 +1,6 @@
 package edu.teamrocket;
 
-interface Movil {
+public interface Movil {
 
     public int getId();
 

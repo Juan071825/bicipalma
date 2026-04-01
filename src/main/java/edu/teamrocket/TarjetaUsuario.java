@@ -24,8 +24,8 @@ public class TarjetaUsuario implements Autenticacion{
 
     public String toString(){
         StringBuilder tarjetaUsuario = new StringBuilder();
-        tarjetaUsuario.append("El estado de la tarjeta " + 
-                              getId() + "es " + isActivada());
+        tarjetaUsuario.append("El estado de autenticacion de " + 
+                              getId() + " es " + isActivada());
         return tarjetaUsuario.toString();
     }
 

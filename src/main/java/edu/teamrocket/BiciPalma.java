@@ -2,50 +2,84 @@ package edu.teamrocket;
 
 public class BiciPalma {
 
-    public static void main(String[] args){
+	public static void main(String[] args) {
 
-        Estacion estacion = new Estacion(1, "palma", 5);
+		Estacion estacion = new Estacion(1, "Manacor", 6);
 
+		/*
+		 * caso TEST visualizar estado de la estacion:
+		 * muestra id, direccion, anclaje 
+		 */
 
-        System.out.println(estacion.anclajesLibres());
+		System.out.println("\n **** caso TEST visualizar estado de la estacion **** \n");
 
+		estacion.consultarEstacion();
 
-        TarjetaUsuario usuario = new TarjetaUsuario("pepe", false);
-        System.out.println(usuario);
+		/*
+		 * caso TEST visualizar anclajes libres
+		 */
 
-        usuario.setActivada(true);
-        System.out.println(usuario);
+		System.out.println("\n **** caso TEST visualizar anclajes libres **** \n");
 
-        System.out.println(estacion.leerTarjetaUsuario(usuario));
+		System.out.println("anclajesLibres: " + estacion.anclajesLibres());
 
+		estacion.consultarAnclajes();
 
-        System.out.println(estacion);
+		/*
+		 * caso TEST anclar bicicleta(s) 
+		 */
 
+		System.out.println("\n **** caso TEST anclar bicicleta(s) **** \n");
 
+		int[] bicicletas = { 291, 292, 293, 294 };
+		
+		Bicicleta bicicleta = null;
+		for (int id : bicicletas) {
+			bicicleta = new Bicicleta(id);
+			estacion.anclarBicicleta(bicicleta);
+		}
 
+		System.out.println("anclajes libres tras generar " + bicicletas.length 
+							+ " bicis: " + estacion.anclajesLibres());
 
-        Bicicleta bici = new Bicicleta(1);
+		/*
+		 * Caso TEST consultar bicicletas ancladas 
+		 */
 
+		System.out.println("\n **** caso TEST consultar bicicletas ancladas **** \n");
 
-        estacion.anclarBicicleta(bici);
-        System.out.println(bici);        
-        System.out.println(estacion.anclajesLibres());
+		estacion.consultarAnclajes();
 
-        estacion.retirarBicicleta(usuario);
-        System.out.println(estacion.anclajesLibres()); 
-        
-        
+		/*
+		 * Caso TEST retirar bicicleta 
+		 */
 
-        usuario.setActivada(false);
+		System.out.println("\n **** caso TEST retirar bicicleta **** \n");
 
-        estacion.anclarBicicleta(bici);     
-        System.out.println(estacion.anclajesLibres());
+		TarjetaUsuario tarjetaUsuario = new TarjetaUsuario("000456789", true);
 
-        estacion.retirarBicicleta(usuario);
-        System.out.println(estacion.anclajesLibres());     
-        
-        usuario.setActivada(true);      
-        estacion.retirarBicicleta(usuario);
-        System.out.println(estacion.anclajesLibres());
-    }
+		System.out.println("¿tarjeta de usuario activada? (true/false): " 
+							+ estacion.leerTarjetaUsuario(tarjetaUsuario));
+
+		estacion.retirarBicicleta(tarjetaUsuario);
+
+		estacion.consultarAnclajes();
+
+		System.out.println("anclajesLibres: " + estacion.anclajesLibres());
+
+		/*
+		 * Caso TEST tarjeta inactiva 
+		 */
+
+		System.out.println("\n **** caso TEST tarjeta inactiva **** \n");
+
+		tarjetaUsuario.setActivada(false);
+
+		System.out.println("¿tarjeta de usuario activada? (true/false): " 
+							+ estacion.leerTarjetaUsuario(tarjetaUsuario));
+
+		estacion.retirarBicicleta(tarjetaUsuario);
+
+		estacion.consultarAnclajes();
+	}
 }
